@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:int-http="http://www.springframework.org/schema/integration/http"
+	xsi:schemaLocation="
+	    http://www.springframework.org/schema/beans
+	    https://www.springframework.org/schema/beans/spring-beans.xsd
+	    http://www.springframework.org/schema/integration
+	    https://www.springframework.org/schema/integration/spring-integration.xsd
+	    http://www.springframework.org/schema/integration/http
+	    https://www.springframework.org/schema/integration/http/spring-integration-http.xsd">
+	
+ 
+    <int-http:inbound-gateway
+    	id="provisionUserGateway"
+    	path="/provision-user"
+    	request-channel="provisionUserRequestChannel"
+    	reply-channel="provisionUserResponseChannel"
+    	/>
+    	
+   <int:channel id="provisionUserResponseChannel"></int:channel>
+
+   <int:chain input-channel="provisionUserRequestChannel" output-channel="provisionUserResponseChannel">
+		<int:header-filter header-names="content-type" />
+		<int:service-activator expression="'User Provisioned!'"/>
+	</int:chain>
+
+</beans>
