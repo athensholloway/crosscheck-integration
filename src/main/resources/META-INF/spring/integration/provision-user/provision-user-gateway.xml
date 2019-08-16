@@ -18,7 +18,15 @@
     	request-channel="provisionUserRequestChannel"
     	reply-channel="provisionUserResponseChannel"
     	/>
-    	
+  
+  <int:channel id="provisionUserRequestChannel"> 
+  	<int:interceptors>
+	  <int:wire-tap channel="logger"/> 
+    </int:interceptors>
+  </int:channel>
+  
+  <int:logging-channel-adapter id="logger" level="TRACE" log-full-message="true"/>
+   	
    <int:channel id="provisionUserResponseChannel"></int:channel>
 
    <int:chain input-channel="provisionUserRequestChannel" output-channel="provisionUserResponseChannel">

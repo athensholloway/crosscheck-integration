@@ -1,0 +1,1 @@
+https://docs.spring.io/spring-integration/docs/5.1.7.RELEASE/reference/html/#channel-special-channels
